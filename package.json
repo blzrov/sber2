@@ -9,6 +9,7 @@
     "@mantine/core": "^6.0.18",
     "@mantine/dates": "^6.0.18",
     "@mantine/dropzone": "^6.0.18",
+    "@mantine/ds": "^6.0.18",
     "@mantine/form": "^6.0.18",
     "@mantine/hooks": "^6.0.18",
     "@mantine/modals": "^6.0.18",
@@ -59,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/react-router-dom": "^5.3.3"
   }
 }
