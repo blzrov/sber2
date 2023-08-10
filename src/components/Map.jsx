@@ -1,18 +1,22 @@
 import React, { useEffect } from "react";
 import { load } from "@2gis/mapgl";
 
-const TestMap = () => {
+const Map = () => {
   useEffect(() => {
     let map;
     load().then((mapglAPI) => {
       map = new mapglAPI.Map("map-container", {
-        center: [56.837823, 60.596273],
-        zoom: 13,
+        center: [60.614842, 56.836161],
+        zoom: 12,
         key: "56bb8749-bb8f-4d10-b59a-18b87c7214e1",
       });
+      map.emit = (event, data) => {
+        if (event === "click") {
+          console.log(data.lngLat);
+        }
+      };
     });
 
-    // Удаляем карту при размонтировании компонента
     return () => map && map.destroy();
   }, []);
 
@@ -30,4 +34,4 @@ const MapWrapper = React.memo(
   () => true
 );
 
-export default TestMap;
+export default Map;
