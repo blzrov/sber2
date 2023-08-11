@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Event from "./pages/Event";
 
 import Header from "./components/Header";
+import Authentication from "./pages/Authentication";
 
 export default function App() {
   const [colorScheme, setColorScheme] = useState("light");
@@ -20,6 +21,9 @@ export default function App() {
         <Router>
           <Header />
           <Switch>
+            <Route path="/authentication">
+              <Authentication />
+            </Route>
             <Route path="/event/:id">
               <Event />
             </Route>

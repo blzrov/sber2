@@ -51,7 +51,7 @@ export default function HeaderMegaMenu() {
   ));
 
   return (
-    <Box className="pb-3">
+    <Box>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: "100%" }}>
           <MantineLogo size={30} />
@@ -103,11 +103,20 @@ export default function HeaderMegaMenu() {
               О нас
             </Link>
           </Group>
-          <Group className={classes.hiddenMobile}>
-            <Button variant="default">Вход</Button>
-            <Button>Регистрация</Button>
-            <ButtonScheme />
-          </Group>
+          {true ? (
+            <Group className={classes.hiddenMobile}>
+              <Button variant="default">Вход</Button>
+              <Link to="/authentication">
+                <Button>Регистрация</Button>
+              </Link>
+              <ButtonScheme />
+            </Group>
+          ) : (
+            <Group className={classes.hiddenMobile}>
+              <Button>Мой профиль</Button>
+              <ButtonScheme />
+            </Group>
+          )}
           <Burger opened={drawerOpened} onClick={toggleDrawer} className={classes.hiddenDesktop} />
         </Group>
       </Header>
@@ -145,11 +154,17 @@ export default function HeaderMegaMenu() {
             О нас
           </Link>
           <Divider my="sm" color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"} />
-          <div className="d-flex align-items-between">
-            <Group position="center" grow pb="xl" px="md">
-              <Button variant="default">Вход</Button>
-              <Button>Регистрация</Button>
-            </Group>
+          <div className="d-flex justify-content-between align-items-center px-3">
+            {false ? (
+              <div className="d-flex">
+                <Button className="me-2" variant="default">
+                  Вход
+                </Button>
+                <Button>Регистрация</Button>
+              </div>
+            ) : (
+              <Button>Мой профиль</Button>
+            )}
             <ButtonScheme />
           </div>
         </ScrollArea>
