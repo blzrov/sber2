@@ -1,28 +1,30 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { load } from "@2gis/mapgl";
 import { key2GIS } from "../helpers/api";
 
 const Map = () => {
-  let mapRef = useRef();
-  let mapAPIRef = useRef();
-
   useEffect(() => {
+    let map;
+    let mapgl;
+
     let isMarked = false;
+
     function handleClick(lngLat) {
-      console.log(isMarked);
       isMarked = true;
-      new mapAPIRef.Marker(mapRef, {
+      new mapgl.Marker(map, {
         coordinates: lngLat,
       });
     }
 
     load().then((mapglAPI) => {
-      let map;
+      mapgl = mapglAPI;
+
       map = new mapglAPI.Map("map-container", {
         center: [60.614842, 56.836161],
         zoom: 12,
         key: key2GIS,
       });
+
       map.emit = (event, data) => {
         if (event === "click") {
           if (!isMarked) {
@@ -30,8 +32,6 @@ const Map = () => {
           }
         }
       };
-      mapRef = map;
-      mapAPIRef = mapglAPI;
     });
     // return () => map && map.destroy();
   }, []);
