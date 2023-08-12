@@ -12,6 +12,7 @@ import {
   Divider,
 } from "@mantine/core";
 import { useState } from "react";
+import { apiURL } from "../helpers/api";
 
 // import Prefe
 
@@ -54,11 +55,43 @@ export default function Authentication() {
   }
 
   function handleLogin() {
-    console.log(data);
+    const doFetch = async () => {
+      const response = await fetch(apiURL + "login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+          email: data.login,
+          password: data.password,
+        }),
+      });
+      const result = await response.json();
+      console.log(result);
+      if (result.access_token) {
+        localStorage.setItem("token", result.access_token);
+      }
+    };
+    doFetch();
   }
 
   function handleReg() {
     console.log(data);
+    const doFetch = async () => {
+      const response = await fetch(apiURL + "register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+          password: data.password,
+          email: data.login,
+        }),
+      });
+      const result = await response.json();
+      console.log(result);
+    };
+    doFetch();
   }
 
   if (isReg) {

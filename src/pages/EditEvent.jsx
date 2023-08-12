@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { Col, Row } from "react-bootstrap";
-
-import { TextInput, Title, Textarea, MultiSelect } from "@mantine/core";
+import { Dropzone } from "@mantine/dropzone";
+import { TextInput, Title, Textarea, MultiSelect, Group, rem, Text } from "@mantine/core";
+import { IconUpload, IconPhoto, IconX } from "@tabler/icons-react";
 import { DateInput, TimeInput } from "@mantine/dates";
 import { IconBrandEtsy } from "@tabler/icons-react";
 import { IconLocationFilled } from "@tabler/icons-react";
@@ -14,9 +15,19 @@ import { tags } from "../helpers/tags";
 
 // if id = "new" CreateEvent
 export default function EditEvent() {
-  const [event, setEvent] = useState();
+  const [event, setEvent] = useState({});
   const [place, setPlace] = useState("");
   const { id } = useParams();
+
+  function handleImg(files) {
+    const file = files[0];
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      const srcData = fileReader.result;
+      setEvent((prev) => ({ ...prev, img: srcData }));
+    };
+    fileReader.readAsDataURL(file);
+  }
 
   return (
     <div>
@@ -102,9 +113,26 @@ export default function EditEvent() {
             radius="xs"
             size="md"
           />
+          <Dropzone
+            maxSize={3 * 1024 ** 2}
+            onDrop={(files) => handleImg(files)}
+            onReject={(files) => console.log("rejected files", files)}
+          >
+            <Group position="center" spacing="xl" style={{ minHeight: rem(220), pointerEvents: "none" }}>
+              {!event.img && <IconUpload size="3.2rem" stroke={1.5} />}
+              <div>
+                {event.img && <img src={event.img} width={200} height={200} />}
+                {!event.img && (
+                  <Text size="xl" inline>
+                    Загрузите фото
+                  </Text>
+                )}
+              </div>
+            </Group>
+          </Dropzone>
         </Col>
         <Col md="7">
-          <div style={{ width: "100%", height: "50vh" }}>
+          <div style={{ width: "100%", height: "66vh" }}>
             <Map onPickMarker={(geo, name) => setPlace(name)} />
           </div>
         </Col>
