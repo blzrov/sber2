@@ -1,3 +1,9 @@
-export default function Container(props) {
-  return <div className="mt-2 px-2">{props.children}</div>;
+import { Container } from "react-bootstrap";
+
+export default function MyContainer(props) {
+  return (
+    <Container fluid className="mt-2">
+      {props.children}
+    </Container>
+  );
 }

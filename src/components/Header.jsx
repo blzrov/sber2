@@ -16,22 +16,26 @@ import {
   Collapse,
   ScrollArea,
   rem,
+  Popover,
+  Spoiler,
 } from "@mantine/core";
 import { MantineLogo } from "@mantine/ds";
+import { IconBellRinging } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown } from "@tabler/icons-react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ButtonScheme from "./ButtonScheme";
 import getHeaderStyles from "../helpers/getHeaderStyles";
 import mockdata from "../helpers/headerMockdata";
 
 export default function HeaderMegaMenu() {
+  const history = useHistory();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const { classes, theme } = getHeaderStyles();
 
   const links = mockdata.map((item) => (
-    <Link key={item.title} to={`/event/${item.path}`}>
+    <Link key={item.title} to={`/${item.path}`}>
       <UnstyledButton className={classes.subLink}>
         <Group noWrap align="flex-start">
           <ThemeIcon size={34} variant="default" radius="md">
@@ -73,7 +77,7 @@ export default function HeaderMegaMenu() {
               <HoverCard.Dropdown sx={{ overflow: "hidden" }}>
                 <Group position="apart" px="md">
                   <Text fw={500}>Категории</Text>
-                  <Anchor href="#" fz="xs">
+                  <Anchor onClick={() => history.push("/events")} fz="xs">
                     Все категории
                   </Anchor>
                 </Group>
@@ -101,11 +105,11 @@ export default function HeaderMegaMenu() {
             <Link to="/event/123" className={classes.link}>
               123
             </Link>
-            <Link to="/event/about" className={classes.link}>
-              О нас
+            <Link to="/admin" className={classes.link}>
+              Страница администратора
             </Link>
           </Group>
-          {true ? (
+          {false ? (
             <Group className={classes.hiddenMobile}>
               <Button variant="default">Вход</Button>
               <Link to="/authentication">
@@ -115,6 +119,30 @@ export default function HeaderMegaMenu() {
             </Group>
           ) : (
             <Group className={classes.hiddenMobile}>
+              <Popover width={600} position="bottom" withArrow shadow="md">
+                <Popover.Target>
+                  <Button compact variant="white" leftIcon={<IconBellRinging />}>
+                    +5
+                  </Button>
+                </Popover.Target>
+                <Popover.Dropdown>
+                  <Spoiler maxHeight={24} showLabel="Прочитать полностью" hideLabel="Скрыть">
+                    <Text size="sm">
+                      This is uncont uncontrolled popover, it is opened when button uncontrolled popover, it is opened
+                      when button rolled popover, it is opened when button is clicked
+                    </Text>
+                  </Spoiler>
+                  <hr />
+                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
+                  <hr />
+                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
+                  <hr />
+                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
+                  <hr />
+                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
+                  <hr />
+                </Popover.Dropdown>
+              </Popover>
               <Button>Мой профиль</Button>
               <ButtonScheme />
             </Group>
@@ -153,7 +181,7 @@ export default function HeaderMegaMenu() {
             123
           </Link>
           <Link to="/event/9" className={classes.link}>
-            О нас
+            Страница администратора
           </Link>
           <Divider my="sm" color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"} />
           <div className="d-flex justify-content-between align-items-center px-3">

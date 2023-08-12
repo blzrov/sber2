@@ -45,8 +45,8 @@ export default function EventsList() {
                 </Badge>
               </HoverCard.Target>
               <HoverCard.Dropdown>
-                <div style={{ width: "100%", height: "50vh" }}>
-                  <Map />
+                <div style={{ width: "100%", height: "15vh" }}>
+                  <Map startMarker={[60.614842, 56.836161]} />
                 </div>
               </HoverCard.Dropdown>
             </HoverCard>

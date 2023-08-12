@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { load } from "@2gis/mapgl";
 import { key2GIS } from "../helpers/api";
 
-const Map = () => {
+const Map = (props) => {
   useEffect(() => {
     let map;
     let mapgl;
@@ -20,18 +20,23 @@ const Map = () => {
       mapgl = mapglAPI;
 
       map = new mapglAPI.Map("map-container", {
-        center: [60.614842, 56.836161],
-        zoom: 12,
+        center: props.startMarker || [60.614842, 56.836161],
+        zoom: props.startMarker ? 15 : 12,
         key: key2GIS,
       });
 
       map.emit = (event, data) => {
         if (event === "click") {
-          if (!isMarked) {
+          if (!isMarked && props.onPickMarker) {
+            props.onPickMarker(data.lngLat);
             handleClick(data.lngLat);
           }
         }
       };
+
+      if (props.startMarker) {
+        handleClick(props.startMarker);
+      }
     });
     // return () => map && map.destroy();
   }, []);

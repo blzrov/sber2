@@ -21,7 +21,7 @@ export default function EventsMap() {
   return (
     <Row>
       <Col md="3">
-        <div style={{ height: "90vh", overflow: "scroll" }}>
+        <div style={{ height: "85vh", overflow: "scroll" }}>
           <SimpleGrid cols={1}>
             {[1, 2, 3, 4, 5, 6, 7].map((e) => (
               <Card key={e} className="mb-2" shadow="sm" padding="lg" radius="md" withBorder>
@@ -48,7 +48,7 @@ export default function EventsMap() {
         </div>
       </Col>
       <Col md="9">
-        <div style={{ width: "100%", height: "90vh" }}>
+        <div style={{ width: "100%", height: "85vh" }}>
           <Map />
         </div>
       </Col>

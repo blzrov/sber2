@@ -12,6 +12,7 @@ import Container from "./components/Container";
 import Authentication from "./pages/Authentication";
 import Events from "./pages/Events";
 import EditEvent from "./pages/EditEvent";
+import Admin from "./pages/Admin";
 
 export default function App() {
   const [colorScheme, setColorScheme] = useState("light");
@@ -32,11 +33,20 @@ export default function App() {
                 <Events />
               </Container>
             </Route>
+            <Route path="/admin">
+              <Container>
+                <Admin />
+              </Container>
+            </Route>
             <Route path="/event/new">
-              <EditEvent />
+              <Container>
+                <EditEvent />
+              </Container>
             </Route>
             <Route path="/event/:id">
-              <Event />
+              <Container>
+                <Event />
+              </Container>
             </Route>
             <Route path="/">
               <Home />
