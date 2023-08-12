@@ -17,6 +17,7 @@ import {
   ScrollArea,
   rem,
   Popover,
+  Title,
   Spoiler,
 } from "@mantine/core";
 import { MantineLogo } from "@mantine/ds";
@@ -59,6 +60,7 @@ export default function HeaderMegaMenu() {
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: "100%" }}>
           <MantineLogo size={30} />
+          {/* <Title order={1}>Екатеринбург</Title> */}
           <Group sx={{ height: "100%" }} spacing={0} className={classes.hiddenMobile}>
             <Link to="/" className={classes.link}>
               Главная
@@ -68,7 +70,7 @@ export default function HeaderMegaMenu() {
                 <Link to="/events" className={classes.link}>
                   <Center inline>
                     <Box component="span" mr={5}>
-                      Мероприятия
+                      Куда сходить
                     </Box>
                     <IconChevronDown size={16} color={theme.fn.primaryColor()} />
                   </Center>
@@ -103,7 +105,7 @@ export default function HeaderMegaMenu() {
               </HoverCard.Dropdown>
             </HoverCard>
             <Link to="/event/123" className={classes.link}>
-              123
+              Мои планы
             </Link>
             <Link to="/admin" className={classes.link}>
               Страница администратора

@@ -5,12 +5,12 @@ const getHeaderStyles = createStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     height: "100%",
-    paddingLeft: theme.spacing.md,
-    paddingRight: theme.spacing.md,
+    paddingLeft: theme.spacing.lg,
+    paddingRight: theme.spacing.lg,
     textDecoration: "none",
     color: theme.colorScheme === "dark" ? theme.white : theme.black,
-    fontWeight: 500,
-    fontSize: theme.fontSizes.sm,
+    fontWeight: 600,
+    fontSize: theme.fontSizes.md,
 
     [theme.fn.smallerThan("sm")]: {
       height: rem(42),

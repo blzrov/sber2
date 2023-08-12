@@ -5,7 +5,8 @@ import { Col, Row } from "react-bootstrap";
 
 import { TextInput, Title, Textarea, MultiSelect } from "@mantine/core";
 import { DateInput, TimeInput } from "@mantine/dates";
-import { IconAt } from "@tabler/icons-react";
+import { IconBrandEtsy } from "@tabler/icons-react";
+import { IconLocationFilled } from "@tabler/icons-react";
 
 import Map from "../components/Map";
 
@@ -27,7 +28,7 @@ export default function EditEvent() {
             onChange={(e) => setEvent(e.target.value)}
             className="mb-2"
             variant="filled"
-            icon={<IconAt />}
+            icon={<IconBrandEtsy />}
             placeholder="Название"
             radius="xs"
             size="md"
@@ -50,7 +51,7 @@ export default function EditEvent() {
                 <DateInput
                   onChange={(e) => console.log(e)}
                   className="mb-2"
-                  placeholder="Введите дату"
+                  placeholder="Введите дату начала"
                   radius="xs"
                   size="md"
                   variant="filled"
@@ -67,11 +68,33 @@ export default function EditEvent() {
                 />
               </Col>
             </Row>
+            <Row>
+              <Col md="7">
+                <DateInput
+                  onChange={(e) => console.log(e)}
+                  className="mb-2"
+                  placeholder="Введите дату окончания"
+                  radius="xs"
+                  size="md"
+                  variant="filled"
+                />
+              </Col>
+              <Col md="5">
+                <TimeInput
+                  onChange={(e) => console.log(e.target.value)}
+                  className="mb-2"
+                  placeholder="Введите время окончания"
+                  radius="xs"
+                  size="md"
+                  variant="filled"
+                />
+              </Col>
+            </Row>
           </div>
           <TextInput
             className="mb-2"
             variant="filled"
-            icon={<IconAt />}
+            icon={<IconLocationFilled />}
             placeholder="Укажите геолокацию на карте"
             disabled
             radius="xs"
@@ -80,7 +103,7 @@ export default function EditEvent() {
         </Col>
         <Col md="7">
           <div style={{ width: "100%", height: "50vh" }}>
-            <Map onPickMarker={(e) => console.log(e)}  />
+            <Map onPickMarker={(e) => console.log(e)} />
           </div>
         </Col>
       </Row>

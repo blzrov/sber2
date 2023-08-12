@@ -4,6 +4,7 @@ import { key2GIS } from "../helpers/api";
 
 const Map = (props) => {
   useEffect(() => {
+    return;
     let map;
     let mapgl;
 
@@ -41,6 +42,7 @@ const Map = (props) => {
     // return () => map && map.destroy();
   }, []);
 
+  return null;
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <MapWrapper />
