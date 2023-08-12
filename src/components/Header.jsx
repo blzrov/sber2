@@ -104,14 +104,14 @@ export default function HeaderMegaMenu() {
                 </div>
               </HoverCard.Dropdown>
             </HoverCard>
-            <Link to="/event/123" className={classes.link}>
+            <Link to="/plans" className={classes.link}>
               Мои планы
             </Link>
             <Link to="/admin" className={classes.link}>
               Страница администратора
             </Link>
           </Group>
-          {false ? (
+          {true ? (
             <Group className={classes.hiddenMobile}>
               <Button variant="default">Вход</Button>
               <Link to="/authentication">

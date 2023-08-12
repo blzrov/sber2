@@ -13,12 +13,16 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 
+// import Prefe
+
 const useStyles = createStyles((theme) => ({
   wrapper: {
     minHeight: rem(900),
     backgroundSize: "cover",
     backgroundImage:
-      "url(https://images.unsplash.com/photo-1484242857719-4b9144542727?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1280&q=80)",
+      theme.colorScheme === "dark"
+        ? "url(https://all.accor.com/magazine/imagerie/6152_de_00_p_2048x1536-46ef.jpg)"
+        : "url(https://upload.wikimedia.org/wikipedia/commons/5/5e/Yekaterinburg-City_%28September_2022%29_-_1.jpg)",
   },
 
   form: {
@@ -39,8 +43,24 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function Authentication() {
-  const [isReg, setIsReg] = useState(true);
+  const [data, setData] = useState({ login: "", password: "" });
+  const [isReg, setIsReg] = useState(false);
+
   const { classes } = useStyles();
+
+  function toggleMode() {
+    setData({ login: "", password: "" });
+    setIsReg(!isReg);
+  }
+
+  function handleLogin() {
+    console.log(data);
+  }
+
+  function handleReg() {
+    console.log(data);
+  }
+
   if (isReg) {
     return (
       <div className={classes.wrapper}>
@@ -51,17 +71,30 @@ export default function Authentication() {
 
           <Divider label="Найти мероприятие по душе" labelPosition="center" my="lg" />
 
-          <TextInput label="Электронная почта" placeholder="hello@gmail.com" size="md" />
-          <PasswordInput label="Пароль" placeholder="password" mt="md" size="md" />
-          <PasswordInput label="Повторите пароль" placeholder="password" mt="md" size="md" />
+          <TextInput
+            value={data.login}
+            onChange={(e) => setData((obj) => ({ ...obj, login: e.target.value }))}
+            label="Электронная почта"
+            placeholder="hello@gmail.com"
+            size="md"
+          />
+          <PasswordInput
+            value={data.password}
+            onChange={(e) => setData((obj) => ({ ...obj, password: e.target.value }))}
+            label="Пароль"
+            placeholder="password"
+            mt="md"
+            size="md"
+          />
+          {/* <PasswordInput value={data.password} label="Повторите пароль" placeholder="password" mt="md" size="md" /> */}
           <Checkbox label="Я ознакомился с правилами сервиса" mt="xl" size="md" />
-          <Button fullWidth mt="xl" size="md">
+          <Button onClick={handleReg} fullWidth mt="xl" size="md">
             Зарегистрироваться
           </Button>
 
           <Text ta="center" mt="md">
             Уже есть аккаунт?{" "}
-            <Anchor onClick={() => setIsReg(false)} weight={700}>
+            <Anchor onClick={toggleMode} weight={700}>
               Войти
             </Anchor>
           </Text>
@@ -78,16 +111,29 @@ export default function Authentication() {
 
           <Divider label="Найти мероприятие по душе" labelPosition="center" my="lg" />
 
-          <TextInput label="Электронная почта" placeholder="hello@gmail.com" size="md" />
-          <PasswordInput label="Пароль" placeholder="password" mt="md" size="md" />
+          <TextInput
+            value={data.login}
+            onChange={(e) => setData((obj) => ({ ...obj, login: e.target.value }))}
+            label="Электронная почта"
+            placeholder="hello@gmail.com"
+            size="md"
+          />
+          <PasswordInput
+            value={data.password}
+            onChange={(e) => setData((obj) => ({ ...obj, password: e.target.value }))}
+            label="Пароль"
+            placeholder="password"
+            mt="md"
+            size="md"
+          />
           <Checkbox label="Не выходить из системы" mt="xl" size="md" />
-          <Button fullWidth mt="xl" size="md">
+          <Button onClick={handleLogin} fullWidth mt="xl" size="md">
             Войти
           </Button>
 
           <Text ta="center" mt="md">
             Нет аккаунта?{" "}
-            <Anchor weight={700} onClick={() => setIsReg(true)}>
+            <Anchor weight={700} onClick={toggleMode}>
               Создать аккаунт
             </Anchor>
           </Text>

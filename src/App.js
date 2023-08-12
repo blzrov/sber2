@@ -13,6 +13,7 @@ import Authentication from "./pages/Authentication";
 import Events from "./pages/Events";
 import EditEvent from "./pages/EditEvent";
 import Admin from "./pages/Admin";
+import MyPlans from "./pages/MyPlans";
 
 export default function App() {
   const [colorScheme, setColorScheme] = useState("light");
@@ -31,6 +32,11 @@ export default function App() {
             <Route path="/events">
               <Container>
                 <Events />
+              </Container>
+            </Route>
+            <Route path="/plans">
+              <Container>
+                <MyPlans />
               </Container>
             </Route>
             <Route path="/admin">
