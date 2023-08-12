@@ -1,0 +1,26 @@
+const tags = [
+  { value: 0, label: "Концерты" },
+  { value: 0, label: "Искусство и культура" },
+  { value: 0, label: "Экскурсии и путешествия" },
+  { value: 0, label: "Вечеринки" },
+  { value: 0, label: "Для детей" },
+  { value: 0, label: "Театры" },
+  { value: 0, label: "Бизнес" },
+  { value: 0, label: "Психология и самопознание" },
+  { value: 0, label: "Наука" },
+  { value: 0, label: "ИТ и интернет" },
+  { value: 0, label: "Другие события" },
+  { value: 0, label: "Спорт" },
+  { value: 0, label: "Выставки" },
+  { value: 0, label: "Интеллектуальные игры" },
+  { value: 0, label: "Хобби и творчество" },
+  { value: 0, label: "Кино" },
+  { value: 0, label: "Другие развлечения" },
+  { value: 0, label: "Красота и здоровье" },
+  { value: 0, label: "Еда" },
+  { value: 0, label: "Иностранные языки" },
+  { value: 0, label: "Гражданские проекты" },
+  { value: 0, label: "Образование за рубежом" },
+];
+
+export { tags };

@@ -61,7 +61,7 @@ export default function HeaderMegaMenu() {
             </Link>
             <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
               <HoverCard.Target>
-                <Link to="/event/0" className={classes.link}>
+                <Link to="/events" className={classes.link}>
                   <Center inline>
                     <Box component="span" mr={5}>
                       Мероприятия
@@ -74,7 +74,7 @@ export default function HeaderMegaMenu() {
                 <Group position="apart" px="md">
                   <Text fw={500}>Категории</Text>
                   <Anchor href="#" fz="xs">
-                    ???
+                    Все категории
                   </Anchor>
                 </Group>
                 <Divider my="sm" mx="-md" color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"} />
@@ -85,13 +85,15 @@ export default function HeaderMegaMenu() {
                   <Group position="apart">
                     <div>
                       <Text fw={500} fz="sm">
-                        Get started
+                        Екатеринбург
                       </Text>
                       <Text size="xs" color="dimmed">
-                        Their food sources have decreased, and their numbers
+                        Найти мероприятие по душе
                       </Text>
                     </div>
-                    <Button variant="default">Get started</Button>
+                    <Link to="/event/new">
+                      <Button variant="default">Создать мероприятие</Button>
+                    </Link>
                   </Group>
                 </div>
               </HoverCard.Dropdown>
