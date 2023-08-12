@@ -111,7 +111,7 @@ export default function HeaderMegaMenu() {
               Страница администратора
             </Link>
           </Group>
-          {true ? (
+          {false ? (
             <Group className={classes.hiddenMobile}>
               <Button variant="default">Вход</Button>
               <Link to="/authentication">

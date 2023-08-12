@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
+import dayjs from "dayjs";
 
 import { Row, Col } from "react-bootstrap";
 
@@ -9,8 +11,26 @@ import Map from "../components/Map";
 import ReviewModal from "../components/ReviewModal";
 
 export default function Event() {
-  const [opened, { open, close }] = useDisclosure(true);
+  const [event, setEvent] = useState(null);
+  const getEvents = () => {
+    //   const doFetch = async () => {
+    //     const response = await fetch(apiURL + "events");
+    //     const result = await response.json();
+    //     localStorage.setItem('data', JSON.stringify(result))
+    //     console.log(result);
+    //   };
+    //   doFetch();
+    const data = JSON.parse(localStorage.getItem("data"));
+    console.log(data.filter((e) => e.id == id)[0]);
+    setEvent(data.filter((e) => e.id == id)[0]);
+  };
+
+  useEffect(getEvents, []);
+
+  const [opened, { open, close }] = useDisclosure(false);
   const { id } = useParams();
+
+  if (!event) return;
 
   return (
     <>
@@ -18,15 +38,18 @@ export default function Event() {
       <Card className="mb-2" shadow="sm" padding="lg" radius="md" withBorder>
         <Row>
           <Col md="5">
-            <Title order={2}>Название</Title>
+            <Title order={2}>{event.name}</Title>
             <Title order={6}>Посетит 250 человек</Title>
           </Col>
           <Col md="2">
-            <Title order={3}>Дата 2</Title>
-            <Title order={3}>Дата 2</Title>
+            <Title order={3}>{dayjs(event.start_at).format("DD.MM.YYYY")}</Title>
+            <Title order={3}>-</Title>
+            <Title order={3}>{dayjs(event.ends_at).format("DD.MM.YYYY")}</Title>
           </Col>
           <Col md="2">
-            <Title order={2}>Время</Title>
+            <Title order={3}>{dayjs(event.start_at).format("HH.mm")}</Title>
+            <Title order={3}>-</Title>
+            <Title order={3}>{dayjs(event.ends_at).format("HH.mm")}</Title>
           </Col>
           <Col md="2">
             {/* <Button size="md" radius="xl">
@@ -61,8 +84,9 @@ export default function Event() {
         </Col>
         <Col md="6">
           <Card shadow="lg" padding="lg" radius="md" withBorder>
-            <div style={{ width: "100%", height: "50vh" }}>
-              <Map startMarker={[60.614842, 56.836161]} />
+            <Title order={3}>{event.location}</Title>
+            <div className="mt-1" style={{ width: "100%", height: "50vh" }}>
+              <Map startMarker={event.geolocation} />
             </div>
           </Card>
         </Col>

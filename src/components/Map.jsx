@@ -4,16 +4,20 @@ import { key2GIS } from "../helpers/api";
 
 const Map = (props) => {
   useEffect(() => {
-    return;
     let map;
     let mapgl;
 
     let isMarked = false;
 
-    function handleClick(lngLat) {
+    function handleClick(lngLat, id) {
       isMarked = true;
-      new mapgl.Marker(map, {
+      const marker = new mapgl.Marker(map, {
         coordinates: lngLat,
+      });
+      marker.on("click", (e) => {
+        if (props.onMarkerClick) {
+          props.onMarkerClick(id);
+        }
       });
     }
 
@@ -26,10 +30,14 @@ const Map = (props) => {
         key: key2GIS,
       });
 
-      map.emit = (event, data) => {
+      map.emit = async (event, data) => {
         if (event === "click") {
           if (!isMarked && props.onPickMarker) {
-            props.onPickMarker(data.lngLat);
+            const response = await fetch(
+              `https://catalog.api.2gis.com/3.0/items/geocode?lon=${data.lngLat[0]}&lat=${data.lngLat[1]}&fields=items.point&key=${key2GIS}`
+            );
+            const result = await response.json();
+            props.onPickMarker(data.lngLat, result.result.items[0].address_name || result.result.items[0].name);
             handleClick(data.lngLat);
           }
         }
@@ -38,11 +46,16 @@ const Map = (props) => {
       if (props.startMarker) {
         handleClick(props.startMarker);
       }
+
+      if (props.events) {
+        props.events.forEach((event) => {
+          handleClick(event.geolocation, event.id);
+        });
+      }
     });
     // return () => map && map.destroy();
   }, []);
 
-  return null;
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <MapWrapper />

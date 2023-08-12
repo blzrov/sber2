@@ -15,6 +15,7 @@ import { tags } from "../helpers/tags";
 // if id = "new" CreateEvent
 export default function EditEvent() {
   const [event, setEvent] = useState();
+  const [place, setPlace] = useState("");
   const { id } = useParams();
 
   return (
@@ -96,6 +97,7 @@ export default function EditEvent() {
             variant="filled"
             icon={<IconLocationFilled />}
             placeholder="Укажите геолокацию на карте"
+            value={place}
             disabled
             radius="xs"
             size="md"
@@ -103,7 +105,7 @@ export default function EditEvent() {
         </Col>
         <Col md="7">
           <div style={{ width: "100%", height: "50vh" }}>
-            <Map onPickMarker={(e) => console.log(e)} />
+            <Map onPickMarker={(geo, name) => setPlace(name)} />
           </div>
         </Col>
       </Row>

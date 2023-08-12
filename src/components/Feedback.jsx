@@ -4,6 +4,7 @@ import { Table, Button, TextInput } from "@mantine/core";
 export default function Feedback() {
   const rows = elements.map((element) => (
     <tr key={element.position}>
+      <th>Ивент + дата</th>
       <td>{element.mass}</td>
       <td>{element.position}</td>
       <td>67</td>
@@ -16,6 +17,7 @@ export default function Feedback() {
         <Table striped highlightOnHover horizontalSpacing="xl" verticalSpacing="sm" fontSize="lg">
           <thead>
             <tr>
+              <th>Ивент</th>
               <th>Пользователь</th>
               <th>Комментарий</th>
               <th>Оценка</th>
@@ -31,7 +33,7 @@ export default function Feedback() {
 const elements = [
   {
     position:
-      "ывфвфвфв.ant@mail.rtov.ant@ывывыв.rtov.ant@mail.rtov.ant@mail.rtov.ant@mail.rtov.ant@mail.rtov.ant@mail.rtov.ant@mail.rttov.ant@mail.ru",
+      "ывфвфвфв.an t@mail.rtov.ant @ывывыв.rtov.a nt@mail.r tov.ant@mail.rt ov.ant@mail.r tov.ant@ma il.rtov .ant@mail.rtov.ant@ma il.rttov .ant@ma il.ruывф вфвфв.an t@mail.rtov.ant @ывывыв.rtov.a nt@mail.r tov.ant@mail.rt ov.ant@mail.r tov.ant@ma il.rtov .ant@mail.rtov.ant@ma il.rttov .ant@ma il.ruывфвфвфв.an t@mail.rtov.ant @ывывыв.rtov.a nt@mail.r tov.ant@mail.rt ov.ant@mail.r tov.ant@ma il.rtov .ant@mail.rtov.ant@ma il.rttov .ant@ma il.ru",
     mass: "Белозеров Денис Васильевич",
     symbol: "C",
     name: "Carbon",
