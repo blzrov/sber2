@@ -16,7 +16,7 @@ import Admin from "./pages/Admin";
 import MyPlans from "./pages/MyPlans";
 
 export default function App() {
-  const [colorScheme, setColorScheme] = useState("light");
+  const [colorScheme, setColorScheme] = useState(localStorage.getItem("theme") || "light");
 
   const toggleColorScheme = (value) => setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 

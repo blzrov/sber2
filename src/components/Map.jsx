@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { load } from "@2gis/mapgl";
+import { useMantineColorScheme } from "@mantine/core";
 import { key2GIS } from "../helpers/api";
 
 const Map = (props) => {
+  const { colorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
   useEffect(() => {
     let map;
     let mapgl;
@@ -28,6 +31,7 @@ const Map = (props) => {
         center: props.startMarker || [60.614842, 56.836161],
         zoom: props.startMarker ? 15 : 12,
         key: key2GIS,
+        style: dark ? "e05ac437-fcc2-4845-ad74-b1de9ce07555" : "c080bb6a-8134-4993-93a1-5b4d8c36a59b",
       });
 
       map.emit = async (event, data) => {

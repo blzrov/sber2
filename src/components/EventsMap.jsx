@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
-import { Card, Image, Text, Badge, Button, Group, SimpleGrid, HoverCard } from "@mantine/core";
+import { Card, Image, Text, Badge, Button, Group, SimpleGrid, CloseButton } from "@mantine/core";
 import Map from "../components/Map";
 
 import { apiURL } from "../helpers/api";
@@ -33,7 +33,7 @@ export default function EventsMap() {
             {events
               .filter((e) => e.id === selectedEvent || selectedEvent === null)
               .map((e) => (
-                <Card key={e} className="mb-2" shadow="sm" padding="lg" radius="md" withBorder>
+                <Card key={e.id} className="mb-2" shadow="sm" padding="lg" radius="md" withBorder>
                   <Card.Section className="mb-2">
                     <Image
                       src={
@@ -44,7 +44,9 @@ export default function EventsMap() {
                       alt="Norway"
                     />
                   </Card.Section>
-                  <Text weight={500}>{e.name}</Text>
+                  <Text className="d-flex align-items-center" weight={500}>
+                    {e.name} {selectedEvent && <CloseButton onClick={() => setSelectedEvent(null)} />}
+                  </Text>
                   <Text size="sm" color="dimmed">
                     {e.description_short}
                   </Text>
@@ -60,10 +62,7 @@ export default function EventsMap() {
       </Col>
       <Col md="9">
         <div style={{ width: "100%", height: "85vh" }}>
-          <Map
-            events={events}
-            onMarkerClick={setSelectedEvent}
-          />
+          <Map events={events} onMarkerClick={setSelectedEvent} />
         </div>
       </Col>
     </Row>
