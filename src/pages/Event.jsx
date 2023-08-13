@@ -31,6 +31,34 @@ export default function Event() {
 
   const [opened, { open, close }] = useDisclosure(false);
 
+  async function subscribe(id) {
+    const response = await fetch(apiURL + "subscribe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer " + user.access_token,
+      },
+      body: JSON.stringify({
+        event_id: id,
+      }),
+    });
+    const result = await response.json();
+  }
+
+  async function like(id) {
+    const response = await fetch(apiURL + "like", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer " + user.access_token,
+      },
+      body: JSON.stringify({
+        event_id: id,
+      }),
+    });
+    const result = await response.json();
+  }
+
   if (!event) return;
 
   return (
@@ -58,7 +86,7 @@ export default function Event() {
             <Title order={3}>{dayjs(event.ends_at).format("HH.mm")}</Title>
           </Col>
           <Col md="2">
-            <Button size="md" radius="xl">
+            <Button onClick={() => subscribe(event.id)} size="md" radius="xl">
               Принять участие
             </Button>
             {/* <Button onClick={open} size="md" radius="xl">
@@ -66,7 +94,7 @@ export default function Event() {
             </Button> */}
           </Col>
           <Col md="1">
-            <Button size="md" radius="xl">
+            <Button onClick={() => like(event.id)} size="md" radius="xl">
               Лайк
             </Button>
           </Col>
