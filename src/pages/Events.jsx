@@ -9,7 +9,7 @@ import { Button, MultiSelect } from "@mantine/core";
 import { tags } from "../helpers/tags";
 
 export default function Events() {
-  const [isMap, setIsMap] = useState(true);
+  const [isMap, setIsMap] = useState(false);
   return (
     <div>
       <Row className="mx-1">

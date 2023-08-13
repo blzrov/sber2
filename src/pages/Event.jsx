@@ -1,34 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
 import dayjs from "dayjs";
 
 import { Row, Col } from "react-bootstrap";
 
-import { Title, Card, Button } from "@mantine/core";
+import { Title, Card, Button, SimpleGrid, Chip } from "@mantine/core";
 
 import Map from "../components/Map";
 import ReviewModal from "../components/ReviewModal";
+import { apiURL } from "../helpers/api";
+import { UserContext } from "../App";
 
 export default function Event() {
+  const user = useContext(UserContext);
+  const { id } = useParams();
   const [event, setEvent] = useState(null);
   const getEvents = () => {
-    //   const doFetch = async () => {
-    //     const response = await fetch(apiURL + "events");
-    //     const result = await response.json();
-    //     localStorage.setItem('data', JSON.stringify(result))
-    //     console.log(result);
-    //   };
-    //   doFetch();
-    const data = JSON.parse(localStorage.getItem("data"));
-    console.log(data.filter((e) => e.id == id)[0]);
-    setEvent(data.filter((e) => e.id == id)[0]);
+    const doFetch = async () => {
+      let response;
+      response = await fetch(apiURL + "events?id=" + id);
+      const result = await response.json();
+      setEvent(result[0]);
+      console.log(result[0]);
+    };
+    doFetch();
   };
 
   useEffect(getEvents, []);
 
   const [opened, { open, close }] = useDisclosure(false);
-  const { id } = useParams();
 
   if (!event) return;
 
@@ -39,7 +40,12 @@ export default function Event() {
         <Row>
           <Col md="5">
             <Title order={2}>{event.name}</Title>
-            <Title order={6}>Посетит 250 человек</Title>
+            {/* <Title order={6}>Посетит 250 человек</Title> */}
+            {event.categories.map((e) => (
+              <Chip checked={false} size="xs" variant="filled">
+                {e.tag_name}
+              </Chip>
+            ))}
           </Col>
           <Col md="2">
             <Title order={3}>{dayjs(event.start_at).format("DD.MM.YYYY")}</Title>
@@ -52,12 +58,12 @@ export default function Event() {
             <Title order={3}>{dayjs(event.ends_at).format("HH.mm")}</Title>
           </Col>
           <Col md="2">
-            {/* <Button size="md" radius="xl">
-              Принять участие
-            </Button> */}{" "}
             <Button size="md" radius="xl">
-              Оставить отзыв
+              Принять участие
             </Button>
+            {/* <Button onClick={open} size="md" radius="xl">
+              Оставить отзыв
+            </Button> */}
           </Col>
           <Col md="1">
             <Button size="md" radius="xl">

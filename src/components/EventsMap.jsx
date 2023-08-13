@@ -10,15 +10,12 @@ export default function EventsMap() {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const getEvents = () => {
-    //   const doFetch = async () => {
-    //     const response = await fetch(apiURL + "events");
-    //     const result = await response.json();
-    //     localStorage.setItem('data', JSON.stringify(result))
-    //     console.log(result);
-    //   };
-    //   doFetch();
-    const data = JSON.parse(localStorage.getItem("data"));
-    setEvents(data.filter((e) => e.description_short.length > 100));
+    const doFetch = async () => {
+      const response = await fetch(apiURL + "events");
+      const result = await response.json();
+      setEvents(result.filter((e) => e.description_short.length > 100));
+    };
+    doFetch();
   };
 
   useEffect(getEvents, []);

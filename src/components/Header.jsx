@@ -19,7 +19,10 @@ import {
   Popover,
   Title,
   Spoiler,
+  Image,
 } from "@mantine/core";
+import logo from "../img/logo.png";
+import { useContext } from "react";
 import { MantineLogo } from "@mantine/ds";
 import { IconBellRinging } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
@@ -28,8 +31,10 @@ import { Link, useHistory } from "react-router-dom";
 import ButtonScheme from "./ButtonScheme";
 import getHeaderStyles from "../helpers/getHeaderStyles";
 import mockdata from "../helpers/headerMockdata";
+import { UserContext } from "../App";
 
 export default function HeaderMegaMenu() {
+  const user = useContext(UserContext);
   const history = useHistory();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
@@ -59,8 +64,7 @@ export default function HeaderMegaMenu() {
     <Box>
       <Header height={60} px="md">
         <Group position="apart" sx={{ height: "100%" }}>
-          <MantineLogo size={30} />
-          {/* <Title order={1}>Екатеринбург</Title> */}
+          <img style={{ width: "210px", height: "58px" }} src={logo} />
           <Group sx={{ height: "100%" }} spacing={0} className={classes.hiddenMobile}>
             <Link to="/" className={classes.link}>
               Главная
@@ -87,31 +91,35 @@ export default function HeaderMegaMenu() {
                 <SimpleGrid cols={2} spacing={0}>
                   {links}
                 </SimpleGrid>
-                <div className={classes.dropdownFooter}>
-                  <Group position="apart">
-                    <div>
-                      <Text fw={500} fz="sm">
-                        Екатеринбург
-                      </Text>
-                      <Text size="xs" color="dimmed">
-                        Найти мероприятие по душе
-                      </Text>
-                    </div>
-                    <Link to="/event/new">
-                      <Button variant="default">Создать мероприятие</Button>
-                    </Link>
-                  </Group>
-                </div>
+                {user.isMod && (
+                  <div className={classes.dropdownFooter}>
+                    <Group position="apart">
+                      <div>
+                        <Text fw={500} fz="sm">
+                          Екатеринбург
+                        </Text>
+                        <Text size="xs" color="dimmed">
+                          Найти мероприятие по душе
+                        </Text>
+                      </div>
+                      <Link to="/event/new">
+                        <Button variant="default">Создать мероприятие</Button>
+                      </Link>
+                    </Group>
+                  </div>
+                )}
               </HoverCard.Dropdown>
             </HoverCard>
             <Link to="/plans" className={classes.link}>
               Мои планы
             </Link>
-            <Link to="/admin" className={classes.link}>
-              Страница администратора
-            </Link>
+            {user.isMod && (
+              <Link to="/admin" className={classes.link}>
+                Страница администратора
+              </Link>
+            )}
           </Group>
-          {true ? (
+          {!user ? (
             <Group className={classes.hiddenMobile}>
               <Link to="/authentication">
                 <Button variant="default">Вход</Button>
@@ -147,7 +155,10 @@ export default function HeaderMegaMenu() {
                   <hr />
                 </Popover.Dropdown>
               </Popover>
-              <Button>Мой профиль</Button>
+
+              <Link to="/profile">
+                <Button>Мой профиль</Button>
+              </Link>
               <ButtonScheme />
             </Group>
           )}

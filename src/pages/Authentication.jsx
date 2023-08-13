@@ -12,6 +12,7 @@ import {
   Divider,
 } from "@mantine/core";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { apiURL } from "../helpers/api";
 
 // import Prefe
@@ -43,11 +44,12 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export default function Authentication() {
+export default function Authentication({ setUser }) {
   const [data, setData] = useState({ login: "", password: "" });
   const [isReg, setIsReg] = useState(false);
 
   const { classes } = useStyles();
+  const history = useHistory();
 
   function toggleMode() {
     setData({ login: "", password: "" });
@@ -67,9 +69,11 @@ export default function Authentication() {
         }),
       });
       const result = await response.json();
-      console.log(result);
+      result.isMod = true;
       if (result.access_token) {
-        localStorage.setItem("token", result.access_token);
+        localStorage.setItem("user", JSON.stringify(result));
+        setUser(result);
+        history.push("/");
       }
     };
     doFetch();

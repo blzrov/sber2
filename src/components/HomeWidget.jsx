@@ -53,6 +53,8 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function HeroBullets() {
+
+
   const { classes } = useStyles();
   return (
     <div>
@@ -78,13 +80,13 @@ export default function HeroBullets() {
               }
             >
               <List.Item>
-                <b>Легко найти</b> – build type safe applications, all components and hooks export types
+                <b>Легко найти</b> – на странице мероприятий вы можете выбрать интересные для себя теги и подобрать удобное по расположение ближе к дому
               </List.Item>
               <List.Item>
-                <b>Проложить маршрут</b> – all packages have MIT license, you can use Mantine in any project
+                <b>Проложить маршрут</b> – узнать как доехать до интересного концерта
               </List.Item>
               <List.Item>
-                <b>Спланировать на месяц вперед</b> – focus ring will appear only when user navigates with keyboard
+                <b>Спланировать на месяц вперед</b> – каждый день новое мероприятие
               </List.Item>
             </List>
           </div>

@@ -7,6 +7,7 @@ import { SimpleGrid, Button } from "@mantine/core";
 import ModTable from "../components/ModTable";
 import Statistics from "../components/Statistics";
 import Feedback from "../components/Feedback";
+import Advertising from "../components/Advertising";
 
 export default function Admin() {
   const [state, setState] = useState(1);
@@ -30,7 +31,7 @@ export default function Admin() {
       {state === 1 && <ModTable />}
       {state === 2 && <Statistics />}
       {state === 3 && <Feedback />}
-      {state === 4 && <div>123</div>}
+      {state === 4 && <Advertising />}
     </>
   );
 }

@@ -9,15 +9,12 @@ import { apiURL } from "../helpers/api";
 export default function EventsList() {
   const [events, setEvents] = useState([]);
   const getEvents = () => {
-    //   const doFetch = async () => {
-    //     const response = await fetch(apiURL + "events");
-    //     const result = await response.json();
-    //     localStorage.setItem('data', JSON.stringify(result))
-    //     console.log(result);
-    //   };
-    //   doFetch();
-    const data = JSON.parse(localStorage.getItem("data"));
-    setEvents(data);
+    const doFetch = async () => {
+      const response = await fetch(apiURL + "events");
+      const result = await response.json();
+      setEvents(result);
+    };
+    doFetch();
   };
 
   useEffect(getEvents, []);
