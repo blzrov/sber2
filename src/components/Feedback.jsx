@@ -5,9 +5,9 @@ export default function Feedback() {
   const rows = elements.map((element) => (
     <tr key={element.position}>
       <th>Ивент + дата</th>
-      <td>{element.mass}</td>
-      <td>{element.position}</td>
-      <td>67</td>
+      <td>Иванов Иван Иванович</td>
+      <td>КрУТО, Классно!</td>
+      <td>89</td>
     </tr>
   ));
 

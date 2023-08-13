@@ -28,7 +28,7 @@ export default function Home() {
 
   useEffect(getEvents, []);
 
-  if (events.length == 0) return;
+  if (events.length !== 6) return;
 
   return (
     <Row>

@@ -134,24 +134,17 @@ export default function HeaderMegaMenu() {
               <Popover width={600} position="bottom" withArrow shadow="md">
                 <Popover.Target>
                   <Button compact variant="white" leftIcon={<IconBellRinging />}>
-                    +5
+                    +2
                   </Button>
                 </Popover.Target>
                 <Popover.Dropdown>
                   <Spoiler maxHeight={24} showLabel="Прочитать полностью" hideLabel="Скрыть">
                     <Text size="sm">
-                      This is uncont uncontrolled popover, it is opened when button uncontrolled popover, it is opened
-                      when button rolled popover, it is opened when button is clicked
+                    Уже через неделю день города! Найдите себе мероприятие по душе и отправьтесь на него, проложив маршрут в 2ГИС.
                     </Text>
                   </Spoiler>
                   <hr />
-                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
-                  <hr />
-                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
-                  <hr />
-                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
-                  <hr />
-                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
+                  <Text size="sm">Уже через неделю день города!</Text>
                   <hr />
                 </Popover.Dropdown>
               </Popover>
@@ -192,15 +185,15 @@ export default function HeaderMegaMenu() {
             </Anchor>
           </UnstyledButton>
           <Collapse in={linksOpened}>{links}</Collapse>
-          <Link to="/event/8" className={classes.link}>
-            123
+          <Link to="/plans" className={classes.link}>
+          Мои планы
           </Link>
-          <Link to="/event/9" className={classes.link}>
+          <Link to="/admin" className={classes.link}>
             Страница администратора
           </Link>
           <Divider my="sm" color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"} />
           <div className="d-flex justify-content-between align-items-center px-3">
-            {false ? (
+            {!user ? (
               <div className="d-flex">
                 <Button className="me-2" variant="default">
                   Вход

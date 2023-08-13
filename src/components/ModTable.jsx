@@ -44,10 +44,8 @@ export default function ModTable() {
 
 const elements = [
   { position: "molotov.ant@mail.ru", mass: "Белозеров Денис Васильевич", symbol: "C", name: "Carbon" },
-  { position: 7, mass: 14.007, symbol: "N", name: "Nitrogen" },
-  { position: 39, mass: 88.906, symbol: "Y", name: "Yttrium" },
-  { position: 56, mass: 137.33, symbol: "Ba", name: "Barium" },
-  { position: 58, mass: 140.12, symbol: "Ce", name: "Cerium" },
+  { position: "Иванов Иван Юрьевич", mass: "test@mail.ru", symbol: "N", name: "Nitrogen" },
+  { position: "Туц утц туц", mass: "test2@mail.ru", symbol: "Y", name: "Yttrium" },
 ];
 
 function AddModModal({ opened, close }) {
